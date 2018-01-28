@@ -1,0 +1,15 @@
+---
+- name: Create openhab user
+  command: useradd -r -s /sbin/nologin openhab
+
+- name: Set openhab group
+  command: usermod -a -G openhab openhab
+
+- name: Creates openhab dir's
+  file: path={{ item }} state=directory owner=openhab group=openhab mode=0775
+  with_items:
+    - "/opt/openhab"
+    - "/opt/openhab/conf"
+    - "/opt/openhab/userdate"
+    - "/opt/openhab/addons"
+
